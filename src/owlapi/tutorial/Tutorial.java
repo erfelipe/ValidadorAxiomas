@@ -6,6 +6,7 @@ package owlapi.tutorial;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.expression.OWLEntityChecker;
 import org.semanticweb.owlapi.expression.ShortFormEntityChecker;
+import org.semanticweb.owlapi.formats.TurtleDocumentFormat;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.util.BidirectionalShortFormProvider;
 import org.semanticweb.owlapi.util.CachingBidirectionalShortFormProvider;
@@ -60,6 +61,25 @@ public class Tutorial {
 			OWLSubClassOfAxiom m_sub_p = df.getOWLSubClassOfAxiom(mulher, pessoa);
 			o.addAxiom(m_sub_p);
 
+			//salvar ontologia
+			File arq = new File("/Users/eduardofelipe/Workspace/AxiomValidator/res/saida.owl");
+			OWLDocumentFormat formato = man.getOntologyFormat(o);
+			try {
+				man.saveOntology(o, formato, IRI.create(arq));
+			} catch (OWLOntologyStorageException e) {
+				e.printStackTrace();
+			}
+
+			//salvar em formato Turtle
+			File arqTurtle = new File("/Users/eduardofelipe/Workspace/AxiomValidator/res/saidaTurtle.ttl");
+			OWLDocumentFormat formatoTurtle = new TurtleDocumentFormat();
+			try {
+				man.saveOntology(o, formatoTurtle, IRI.create(arqTurtle));
+			} catch (OWLOntologyStorageException e) {
+				e.printStackTrace();
+			}
+
+			//saida console
 			System.out.println(o);
 		} catch (OWLOntologyCreationException e) {
 			e.printStackTrace();

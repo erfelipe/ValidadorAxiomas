@@ -6,7 +6,8 @@ public class main {
 
 		Tutorial tutorial = new Tutorial();
 		//tutorial.inicio();
-		tutorial.testeValidacao();
+//		tutorial.testeValidacao();
+		tutorial.testeAxioma();
 	}
 
 }
